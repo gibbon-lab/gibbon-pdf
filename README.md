@@ -1,6 +1,6 @@
 # Gibbon-pdf
 
-Docker image: https://hub.docker.com/r/spacefill/gibbon-mail
+Docker image: https://hub.docker.com/r/gibbonlab/gibbon-mail
 
 Generate PDF with Template and JSON Schema.
 
@@ -36,7 +36,7 @@ Screencast: https://www.youtube.com/watch?v=2M10x76f6c8
 
 ## Docker Image
 
-[`spacefill/gibbon-pdf`](https://hub.docker.com/r/spacefill/gibbon-pdf) Docker
+[`gibbonlab/gibbon-pdf`](https://hub.docker.com/r/gibbon-lab/gibbon-pdf) Docker
 Image is automatically builded with with our CI. We currently maintain several versions
 as we use [`semver`](https://semver.org/) to tag our docker images
 

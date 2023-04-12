@@ -65,15 +65,15 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.SPACEFILL_DOCKER_REGISTRY_USERNAME }}
-          password: ${{ secrets.SPACEFILL_DOCKER_REGISTRY_PASSWORD }}
+          username: ${{ secrets.GIBBON_LAB_DOCKER_REGISTRY_USERNAME }}
+          password: ${{ secrets.GIBBON_LAB_DOCKER_REGISTRY_PASSWORD }}
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           platforms: linux/amd64,linux/arm64
           push: false
-          tags: spacefill/gibbon-pdf:latest
+          tags: gibbonlab/gibbon-pdf:latest
           file: docker-image/Dockerfile
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

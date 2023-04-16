@@ -113,9 +113,7 @@
                             </td>
 
                             <td>
-                                Invoice #: {{ invoice_id }}<br>
-                                Created: {{ created }}<br>
-                                Due: {{ due }}
+                                
                             </td>
                         </tr>
                     </table>
@@ -127,11 +125,11 @@
                     <table>
                         <tr>
                             <td>
-                                {{ from | striptags(true) | escape | nl2br }}
+                                
                             </td>
 
                             <td>
-                                {{ to | striptags(true) | escape | nl2br }}
+                                
                             </td>
                         </tr>
                     </table>
@@ -167,17 +165,6 @@
                     Price
                 </td>
             </tr>
-{% for item in items %}
-            <tr class="item">
-                <td>
-                    {{ item.name }}
-                </td>
-
-                <td>
-                    {{ item.price }}
-                </td>
-            </tr>
-{% endfor %}
 
             <tr class="total">
                 <td></td>

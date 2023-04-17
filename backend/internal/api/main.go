@@ -1,28 +1,50 @@
 package api
 
 import (
-	"github.com/flosch/pongo2/v6"
+	"fmt"
+	"os"
+	"path/filepath"
+
 	"github.com/gin-gonic/gin"
 )
 
 var engine *gin.Engine
 
+const templatePath = "../pdf-templates/"
+
 func InitApi() {
 	engine = gin.Default()
 
-	engine.GET("/ping", func(c *gin.Context) {
-		tpl, err := pongo2.FromString("Hello {{ name|capfirst }}!")
-		if err != nil {
-			panic(err)
-		}
-		// Now you can render the template with the given
-		// pongo2.Context how often you want to.
-		out, err := tpl.Execute(pongo2.Context{"name": "alex"})
-		if err != nil {
-			panic(err)
-		}
+	engine.GET("/version", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": out,
+			"version": "0.0.1",
+		})
+	})
+
+	engine.GET("/v1/templates/", func(c *gin.Context) {
+		var dirs []string
+		err := filepath.Walk(templatePath, func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if !info.IsDir() || templatePath == path {
+				return nil
+			}
+
+			dirs = append(dirs, filepath.Base(path))
+			return nil
+		})
+
+		if err != nil {
+			fmt.Println(fmt.Errorf("computing template list: %v", err))
+			c.JSON(500, gin.H{
+				"error": "internal server error",
+			})
+			return
+		}
+
+		c.JSON(200, gin.H{
+			"templates": dirs,
 		})
 	})
 

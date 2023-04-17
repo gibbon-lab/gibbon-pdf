@@ -1,0 +1,21 @@
+version: '3'
+services:
+  goworkspace:
+    build:
+      context: ./build/docker
+      dockerfile: workspace.Dockerfile
+    command: /bin/sleep infinity
+    restart: unless-stopped
+    volumes:
+      - ./:/code/
+    # environment:
+    #   - test=test
+
+  api:
+    image: itsalex/alpine-reflex:latest
+    restart: unless-stopped
+    volumes:
+      - ./:/code/
+    ports:
+      - 8080:8080
+    command: reflex -g code/assets/bin/api -s /code/assets/bin/api

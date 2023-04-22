@@ -1,5 +1,6 @@
 {
     "type": "object",
+    "required": ["invoice_id"],
     "properties": {
         "invoice_id": {
             "type": "integer",

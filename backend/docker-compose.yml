@@ -12,10 +12,12 @@ services:
     #   - test=test
 
   api:
-    image: itsalex/alpine-reflex:latest
+    image: itsalex/alpine-reflex-with-golang:1.20.3-alpine3.17
     restart: unless-stopped
+    working_dir: /code
     volumes:
       - ./:/code/
+      - ../pdf-templates:/templates/
     ports:
       - 8080:8080
-    command: reflex -g code/assets/bin/api -s /code/assets/bin/api
+    command: reflex -r '\.go$' -s -- sh -c 'go mod download && go run /code/cmd/gibbon-pdf/main.go'

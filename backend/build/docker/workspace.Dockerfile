@@ -1,4 +1,7 @@
-FROM golang:1.20
+FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:1.20
+
+ARG TARGETOS
+ARG TARGETARCH
 
 WORKDIR /code
 
@@ -17,3 +20,5 @@ RUN apt-get update -y && \
 ENV GOCACHE="/go/cache"
 ENV GOBIN="/go/bin"
 ENV PATH="/go/bin:$PATH"
+ENV GOOS=${TARGETOS}
+ENV GOARCH=${TARGETARCH}

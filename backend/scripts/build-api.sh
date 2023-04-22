@@ -4,4 +4,4 @@ set -e
 cd "$(dirname "$0")/../"
 
 mkdir -p assets/bin
-go build -o assets/bin/api cmd/gibbon-pdf/main.go
+go build --ldflags '-linkmode external -extldflags "-static"' -o assets/bin/api cmd/gibbon-pdf/main.go
